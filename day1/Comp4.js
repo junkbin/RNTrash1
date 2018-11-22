@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, PermissionsAndroid} from 'react-native';
 import Contacts from 'react-native-contacts';
 
 
@@ -10,8 +10,45 @@ export class Comp4 extends React.Component {
         this.state = {};
     }
 
-    componentDidMount(){
-        
+    async requestReadContactsPermission() {
+        try {
+          const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
+            {
+              'title': 'App Premission',
+              'message': 'Chat x App need permission.'
+            }
+          )
+          if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+            console.log("You can read contacts")
+          } else {
+            console.log("read contacts permission denied")
+          }
+        } catch (err) {
+          console.warn(err)
+        }
+    }
+
+    listContacts() {
+        this.requestReadContactsPermission().then(
+            Contacts.checkPermission((err, permission) => {
+                if (err) throw err;
+    
+                // Contacts.PERMISSION_AUTHORIZED || Contacts.PERMISSION_UNDEFINED || Contacts.PERMISSION_DENIED
+                if (permission === 'undefined') {
+                  Contacts.requestPermission((err, permission) => {
+                    // ...
+                  })
+                }
+                if (permission === 'authorized') {
+                  this.getAllContacts()
+                }
+                if (permission === 'denied') {
+                  // x.x
+                }
+              })
+        )
+    
     }
 
     render(){
