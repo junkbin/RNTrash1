@@ -23,15 +23,24 @@ export class Comp4 extends React.Component {
 
   getContacts = () => {
       this.requestContactsPermission()
-          .then(function (didGetPermission: boolean) {
+          .then(function (didGetPermission) {
               if (didGetPermission) {
                   Contacts.getAll((err, contacts) => {
-                      if (err) throw err;
-                      alert("We got some contacts!")
+                      if(err){
+                        throw err;
+                      } 
+
+                      else{
+                        console.log(contacts);
+                        alert("We got some contacts!", contacts)
+                      }
+                      
                   })
               } else {
                   alert("Oh no no permissions!")
               }
+          }).catch((err)=>{
+              console.log(err);
           })
   }
 

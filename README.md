@@ -8,6 +8,10 @@
 * (https://github.com/rt2zz/react-native-contacts)[https://github.com/rt2zz/react-native-contacts]
 
 
+## Basics
+* DEBUG
+* console.log();
+
 ## TODO LIST 
 * Contact List
 * SMS List
