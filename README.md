@@ -11,6 +11,9 @@
 * Side Navigation
 * Splash 
 
+## Crash Hnadling
+* Crashlytics. 
+
 ## RUN EMULATOR
 * List all emulator
 ```
