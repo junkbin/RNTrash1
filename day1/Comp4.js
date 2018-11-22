@@ -10,6 +10,9 @@ export class Comp4 extends React.Component {
         this.state = {};
     }
 
+    componentDidMount(){
+        
+    }
 
     render(){
         return (
