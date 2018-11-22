@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, PermissionsAndroid} from 'react-native';
+import {View, Text, Button, PermissionsAndroid} from 'react-native';
 import Contacts from 'react-native-contacts';
 
 
@@ -10,46 +10,30 @@ export class Comp4 extends React.Component {
         this.state = {};
     }
 
-    async requestReadContactsPermission() {
-        try {
-          const granted = await PermissionsAndroid.request(
-            PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
-            {
-              'title': 'App Premission',
-              'message': 'Chat x App need permission.'
-            }
-          )
-          if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-            console.log("You can read contacts")
-          } else {
-            console.log("read contacts permission denied")
+    async requestContactsPermission() {
+      const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
+          {
+              title: 'Hey you need to give us contacts permissions!',
+              message: 'We need to read your contacts so we can sell them to advertisers.'
           }
-        } catch (err) {
-          console.warn(err)
-        }
-    }
+      )
+      return granted === PermissionsAndroid.RESULTS.GRANTED
+  }
 
-    listContacts() {
-        this.requestReadContactsPermission().then(
-            Contacts.checkPermission((err, permission) => {
-                if (err) throw err;
-    
-                // Contacts.PERMISSION_AUTHORIZED || Contacts.PERMISSION_UNDEFINED || Contacts.PERMISSION_DENIED
-                if (permission === 'undefined') {
-                  Contacts.requestPermission((err, permission) => {
-                    // ...
+  getContacts = () => {
+      this.requestContactsPermission()
+          .then(function (didGetPermission: boolean) {
+              if (didGetPermission) {
+                  Contacts.getAll((err, contacts) => {
+                      if (err) throw err;
+                      alert("We got some contacts!")
                   })
-                }
-                if (permission === 'authorized') {
-                  this.getAllContacts()
-                }
-                if (permission === 'denied') {
-                  // x.x
-                }
-              })
-        )
-    
-    }
+              } else {
+                  alert("Oh no no permissions!")
+              }
+          })
+  }
 
     render(){
         return (
@@ -57,6 +41,8 @@ export class Comp4 extends React.Component {
                 <Text style={{color:'white', fontSize:40}}>
                     AFFIXUS PVT.
                 </Text>
+                <Button title="Press me for contacts!" onPress={this.getContacts} />
+
             </View>
         );
     }
