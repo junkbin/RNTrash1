@@ -10,3 +10,14 @@
 ## NativeBase
 * Side Navigation
 * Splash 
+
+## RUN EMULATOR
+* List all emulator
+```
+/Users/santosh/Library/Android/sdk/tools/bin/avdmanager list avd
+```
+
+* Start an emulator
+```
+    /Users/santosh/Library/Android/sdk/tools/emulator @Nexus_5X_API_26
+```
