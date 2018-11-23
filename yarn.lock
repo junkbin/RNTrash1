@@ -4007,6 +4007,10 @@ react-is@^16.6.1:
   version "16.6.3"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.6.3.tgz#d2d7462fcfcbe6ec0da56ad69047e47e56e7eac0"
 
+react-native-contacts@^2.2.4:
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/react-native-contacts/-/react-native-contacts-2.2.4.tgz#6038aefdae6725073536e40bd350bcf255e48062"
+
 react-native@0.57.5:
   version "0.57.5"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.57.5.tgz#f1dbcbf1f889845fba954f3e0d47e61cf89d41d9"
